@@ -11,13 +11,15 @@ IMAGE_PATH = "../images/"
 
 #===============================================================================
 
-st.write("## Testons l'acquisition photo.")
+html_title = "<h2 style='color:red'>Testons l'acquisition photo !</h2>"
+st.markdown(html_title, unsafe_allow_html=True)
+
 picture = take_a_picture(key=6453)
 button1 = st.button("Test", key=1)
 
 if button1:
     df = picture_to_df(picture)
-    st.write(type(df))
+    # st.write(type(df))
     if type(df) == type("toto"):
         st.write("Problème dans l'acquisition photo.")
     else:
