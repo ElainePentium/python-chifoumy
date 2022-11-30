@@ -2,23 +2,23 @@
 
 import streamlit as st
 
-html_title = "<h2 style='color:red'>À propos</h2>"
+html_title = "<h1 style='color:#FF036A'>À propos</h1>"
 st.markdown(html_title, unsafe_allow_html=True)
 
 html_text = """
-<div style='color:blue'>
+<div style='color:#44B7E3;font-size:30px'>
 Une application proposée par la Chifouteam :
 <ul>
-<li>
+<li style='color:#44B7E3;font-size:30px'>
 Claire
 </li>
-<li>
+<li style='color:#44B7E3;font-size:30px'>
 David
 </li>
-<li>
+<li style='color:#44B7E3;font-size:30px'>
 Pierre
 </li>
-<li>
+<li style='color:#44B7E3;font-size:30px'>
 Stéphanie
 </li>
 </ul>
