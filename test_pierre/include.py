@@ -6,21 +6,26 @@ import mediapipe as mp
 import pandas as pd
 from PIL import Image
 import numpy as np
+import random
 import os
 import cv2
-
-
-
-
+from PIL import Image
 
 #===============================================================================
 
-def take_a_picture():
-    picture = st.camera_input(label="", disabled=False)
+
+def take_a_picture(key=1):
+    """
+    Do not forget to change the key for multiple camera
+    """
+    picture = st.camera_input(label="", disabled=False, key=key)
     return picture
 
 
 def picture_to_df(picture):
+    """
+    Docstring
+    """
     hand_list = []
     mp_hands = mp.solutions.hands
     with mp_hands.Hands(static_image_mode=True, max_num_hands=2, min_detection_confidence=0.5) as hands:
@@ -48,10 +53,9 @@ def picture_to_df(picture):
         paper_df = pd.DataFrame(hand_list)
         return paper_df
 
-picture = take_a_picture()
 
-button = st.button("Convert")
-
-if button:
-    df = picture_to_df(picture)
-    st.write(df)
+def picture_to_target(picture):
+    """
+    Docstring
+    """
+    return random.randint(0, 2)
