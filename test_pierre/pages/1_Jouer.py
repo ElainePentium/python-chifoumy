@@ -2,7 +2,7 @@
 
 import streamlit as st
 from PIL import Image
-from include import take_a_picture, picture_to_target
+from include import take_a_picture, picture_to_target, create_key
 
 #===============================================================================
 
@@ -44,8 +44,9 @@ if button1:
     st.write(f"Score de la machine : {machine_count}")
     while k < 2:
         placeholder.empty()
-        picture = placeholder.camera_input(label=" ", disabled=False, key=975)
-        button2 = st.button('Jouer')
+        picture = placeholder.camera_input(label=" ", disabled=False, key=create_key())
+        button2 = st.button('Jouer', key=create_key())
         if button2:
             result = picture_to_target(picture)
             st.write(f"result={result}")
+        k += 1

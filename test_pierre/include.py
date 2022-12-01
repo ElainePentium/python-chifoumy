@@ -51,6 +51,7 @@ def picture_to_df(picture):
             for i, finger in enumerate(hand_landmarks.landmark, start=1):
                 fingers[f'{i}x'] = (finger.x)
                 fingers[f'{i}y'] = (finger.y)
+                fingers[f'{i}z'] = (finger.z)
             hand_list.append(fingers)
         paper_df = pd.DataFrame(hand_list)
         return paper_df
