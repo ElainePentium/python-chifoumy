@@ -18,7 +18,6 @@ picture = None
 picture = take_a_picture(key=6453)
 if picture:
     button1 = st.button("Tester la photo", key=1)
-
     if button1:
         df = picture_to_df(picture)
         # st.write(type(df))

@@ -46,6 +46,7 @@ def picture_to_df(picture):
             for i, finger in enumerate(hand_landmarks.landmark, start=1):
                 fingers[f'{i}x'] = (finger.x)
                 fingers[f'{i}y'] = (finger.y)
+                fingers[f'{i}z'] = (finger.z)
             hand_list.append(fingers)
         paper_df = pd.DataFrame(hand_list)
         return paper_df
@@ -55,15 +56,13 @@ def picture_to_target(picture):
     """
     Docstring
     """
-    return random.randint(0, 2)
-
-
-
-
-picture = take_a_picture()
-
-button = st.button("Convert")
-
-if button:
     df = picture_to_df(picture)
-    st.write(df)
+    # Load Pipeline from pickle file
+    my_pipeline = pickle.load(open("pipe.pkl", "rb"))
+    result = my_pipeline.predict(df)
+    return result
+
+def create_key():
+    #t = time.time()
+    t = time.perf_counter_ns()
+    return t
