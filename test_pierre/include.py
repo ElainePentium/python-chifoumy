@@ -12,6 +12,7 @@ import cv2
 from PIL import Image
 import pickle
 import time
+import dill
 
 #===============================================================================
 
@@ -51,6 +52,7 @@ def picture_to_df(picture):
             for i, finger in enumerate(hand_landmarks.landmark, start=1):
                 fingers[f'{i}x'] = (finger.x)
                 fingers[f'{i}y'] = (finger.y)
+                fingers[f'{i}z'] = (finger.z)
             hand_list.append(fingers)
         paper_df = pd.DataFrame(hand_list)
         return paper_df
@@ -62,9 +64,10 @@ def picture_to_target(picture):
     """
     df = picture_to_df(picture)
     # Load Pipeline from pickle file
-    my_pipeline = pickle.load(open("pipe.pkl", "rb"))
+    my_pipeline = dill.load(open("pipe.pkl", "rb"))
     result = my_pipeline.predict(df)
-    return result
+    probas = my_pipeline.predict_proba(df)
+    return result, probas
 
 def create_key():
     #t = time.time()

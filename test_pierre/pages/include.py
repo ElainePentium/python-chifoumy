@@ -10,6 +10,8 @@ import random
 import os
 import cv2
 from PIL import Image
+import pickle
+import dill
 
 #===============================================================================
 
@@ -46,16 +48,23 @@ def picture_to_df(picture):
             for i, finger in enumerate(hand_landmarks.landmark, start=1):
                 fingers[f'{i}x'] = (finger.x)
                 fingers[f'{i}y'] = (finger.y)
+                fingers[f'{i}z'] = (finger.z)
             hand_list.append(fingers)
-        paper_df = pd.DataFrame(hand_list)
-        return paper_df
+        df = pd.DataFrame(hand_list)
+        # df = (df - df.mean()) / df.std()
+        return df
 
 
 def picture_to_target(picture):
     """
     Docstring
     """
-    return random.randint(0, 2)
+    df = picture_to_df(picture)
+    # Load Pipeline from pickle file
+    my_pipeline = dill.load(open("pipe.pkl", "rb"))
+    result = my_pipeline.predict(df)
+    probas = my_pipeline.predict_proba(df)
+    return result, probas
 
 
 
@@ -67,3 +76,6 @@ button = st.button("Convert")
 if button:
     df = picture_to_df(picture)
     st.write(df)
+    result, probas = picture_to_target(picture)
+    st.write(result)
+    st.write(probas)
