@@ -1,19 +1,30 @@
+# Le Wagon minimal packages
+pytest
+pylint
+ipdb
+jupyterlab
+matplotlib
+seaborn
+# data science
+numpy
+pandas
+scikit-learn
+
+# model loading
+pickle
+dill
+
 # packaging
 pip>=9
 setuptools>=26
 twine
 wheel>=0.29
 
-# data science
-numpy
-pandas
-scikit-learn
-
 # tests/linter
 black
 coverage
 flake8
-pytest
+# pytest
 yapf
 
 # API
@@ -31,6 +42,3 @@ termcolor
 # special chifoumy
 mediapipe
 streamlit
-
-
-
