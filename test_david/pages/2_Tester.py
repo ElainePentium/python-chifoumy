@@ -27,14 +27,14 @@ if picture:
         else:
             st.write(df)
             # st.write(df.shape)
-            target = picture_to_target(picture)
-            st.write(type(target))
-            st.write(target)
+            # ###### target = picture_to_target(picture)
+            #st.write(type(target))
+            #st.write(target)
             #result = target[0][0]
-            #prob = target[0][1]
+            #prob = target[1][0]
 
-            st.write(target[0])
-            st.write(type(target[0]))
+            #st.write(target[0])
+            #st.write(type(target[0]))
             prob_pierre = round((target[1][0][0])*100)
             prob_feuille = round((target[1][0][1])*100)
             prob_ciseaux = round((target[1][0][2])*100)

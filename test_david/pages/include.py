@@ -61,7 +61,8 @@ def picture_to_target(picture):
     """
     df = picture_to_df(picture)
     # Load Pipeline from pickle file
-    my_pipeline = dill.load(open("pipe.pkl", "rb"))
+    with open('pipe.pkl', 'rb') as file:
+        my_pipeline = dill.load(file)
     result = my_pipeline.predict(df)
     probas = my_pipeline.predict_proba(df)
     return result, probas
