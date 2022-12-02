@@ -9,6 +9,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.svm import SVC
 from sklearn.compose import ColumnTransformer, make_column_transformer, make_column_selector
 import dill
+import pickle
 
 #===============================================================================
 
@@ -31,7 +32,7 @@ if picture:
             st.write("Problème dans l'acquisition photo.")
         else:
             st.write(df)
-            # st.write(df.shape)
+            st.write(df.shape)
             # ###### target = picture_to_target(picture)
             #st.write(type(target))
             #st.write(target)
@@ -40,28 +41,29 @@ if picture:
 
             #st.write(target[0])
             #st.write(type(target[0]))
-            model = SVC(kernel= 'poly', gamma = 1, coef0 = 0, C = 0.01, probability=True)
             # X_train = (X_train - X_train.mean()) / X_train.std()
             # rounder = FunctionTransformer(lambda array: np.round(array, decimals=2))
-            normalizer = FunctionTransformer(lambda x: (x - x.mean()) / x.std())
-            scaling = make_column_transformer((MinMaxScaler(), make_column_selector(dtype_include=['float64'])))
-            pipeline = make_pipeline(normalizer, scaling)
-            pipeline
-            with open('pipe.pkl', 'rb') as file:
-                trained_model = dill.load(file)
-            y_pred = trained_model.predict(df)
-            prob_pierre = round((target[1][0][0])*100)
-            prob_feuille = round((target[1][0][1])*100)
-            prob_ciseaux = round((target[1][0][2])*100)
-            st.write (f'probabilité de Pierre : {prob_pierre} %')
-            st.write (f'probabilité de Feuille : {prob_feuille} %')
-            st.write (f'probabilité de Ciseaux : {prob_ciseaux} %')
 
+            dfn = df.apply(lambda x: (x - x.mean()) / x.std(), axis =1)
+            st.write(dfn)
+            scaler = pickle.load(open("scaler.pkl", "rb"))
+
+            trained_model = pickle.load(open("trained_model.pkl", "rb"))
+
+            #df_normalized = normalizer.transform(df)
+            df_preprocessed = scaler.transform(dfn)
+            y_pred = trained_model.predict(df_preprocessed)
+            y_pred_proba = trained_model.predict_proba(df_preprocessed)
+            y_pred, y_pred_proba
+            #prob_pierre = round((target[1][0][0])*100)
+            #prob_feuille = round((target[1][0][1])*100)
+            #prob_ciseaux = round((target[1][0][2])*100)
             #st.write(type(target))
             #st.write(target.shape)
             html_pierre ="<div style='color:#E37B01;font-size:30px'>Votre geste : pierre</div>"
             html_feuille ="<div style='color:#AEC90E;font-size:30px'>Votre geste : feuille</div>"
             html_ciseaux ="<div style='color:#8B4C89;font-size:30px'>Votre geste : ciseaux</div>"
             chifoudict = {0: html_pierre, 1: html_feuille, 2: html_ciseaux}
-            html_gesture = chifoudict[target[0][0]]
+            #html_gesture = chifoudict[target[0][0]]
+            html_gesture = chifoudict[y_pred[0]]
             st.markdown(html_gesture, unsafe_allow_html=True)
