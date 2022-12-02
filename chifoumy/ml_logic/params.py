@@ -7,7 +7,8 @@ import os
 # import numpy as np
 
 LOCAL_DATA_PATH = os.path.expanduser(os.environ.get("LOCAL_DATA_PATH"))
-# LOCAL_REGISTRY_PATH = os.path.expanduser(os.environ.get("LOCAL_REGISTRY_PATH"))
+LOCAL_CSV_PATH = os.path.expanduser(os.environ.get("LOCAL_CSV_PATH"))
+LOCAL_REGISTRY_PATH = os.path.expanduser(os.environ.get("LOCAL_REGISTRY_PATH"))
 # DATASET_SIZE = os.environ.get("DATASET_SIZE")
 # VALIDATION_DATASET_SIZE = os.environ.get("VALIDATION_DATASET_SIZE")
 # CHUNK_SIZE = int(os.environ.get("CHUNK_SIZE"))

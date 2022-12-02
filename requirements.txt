@@ -11,7 +11,7 @@ pandas
 scikit-learn
 
 # model loading
-pickle
+# pickle
 dill
 
 # packaging
@@ -40,5 +40,6 @@ memoized-property
 termcolor
 
 # special chifoumy
-mediapipe
+mediapipe; sys_platform == 'linux'
+mediapipe-silicon; sys_platform == 'darwin'
 streamlit
