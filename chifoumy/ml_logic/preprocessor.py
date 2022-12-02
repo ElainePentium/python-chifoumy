@@ -13,7 +13,7 @@ def preprocess_features(X: pd.DataFrame) -> np.ndarray:
 
     def create_sklearn_preprocessor() -> ColumnTransformer:
 
-        normalizer = FunctionTransformer(lambda x: (x - x.mean()) / x.std(), axis =1)
+        normalizer = FunctionTransformer(lambda df: df.apply(lambda row: (row - row.mean()) / row.std(), axis =1))
         scaling = make_column_transformer((MinMaxScaler(), make_column_selector(dtype_include=['float64'])))
 
         preprocess = make_pipeline(normalizer, scaling)
