@@ -10,10 +10,6 @@ numpy
 pandas
 scikit-learn
 
-# model loading
-#pickle
-dill
-
 # packaging
 pip>=9
 setuptools>=26
