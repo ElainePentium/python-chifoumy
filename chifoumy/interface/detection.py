@@ -29,7 +29,7 @@ def picture_to_df(picture):
     hand_list = []
     mp_hands = mp.solutions.hands
     with mp_hands.Hands(static_image_mode=True,
-                        max_num_hands=2,
+                        max_num_hands=1,
                         min_detection_confidence=0.5) as hands:
         image_flip = cv2.flip(picture, 1)
         result_flip = hands.process(cv2.cvtColor(image_flip, cv2.COLOR_BGR2RGB))
