@@ -61,8 +61,3 @@ def picture_to_target(picture):
     my_pipeline = pickle.load(open("pipe.pkl", "rb"))
     result = my_pipeline.predict(df)
     return result
-
-def create_key():
-    #t = time.time()
-    t = time.perf_counter_ns()
-    return t

@@ -56,7 +56,6 @@ def picture_to_df(picture):
         paper_df = pd.DataFrame(hand_list)
         return paper_df
 
-
 def picture_to_target(picture):
     """
     Docstring
@@ -68,6 +67,5 @@ def picture_to_target(picture):
     return result
 
 def create_key():
-    #t = time.time()
     t = time.perf_counter_ns()
     return t

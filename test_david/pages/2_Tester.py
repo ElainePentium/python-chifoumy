@@ -4,6 +4,11 @@ import streamlit as st
 #from PIL import Image
 from include import take_a_picture, picture_to_df, picture_to_target
 import pandas as pd
+from sklearn.preprocessing import MinMaxScaler,FunctionTransformer
+from sklearn.pipeline import make_pipeline
+from sklearn.svm import SVC
+from sklearn.compose import ColumnTransformer, make_column_transformer, make_column_selector
+import dill
 
 #===============================================================================
 
@@ -35,6 +40,16 @@ if picture:
 
             #st.write(target[0])
             #st.write(type(target[0]))
+            model = SVC(kernel= 'poly', gamma = 1, coef0 = 0, C = 0.01, probability=True)
+            # X_train = (X_train - X_train.mean()) / X_train.std()
+            # rounder = FunctionTransformer(lambda array: np.round(array, decimals=2))
+            normalizer = FunctionTransformer(lambda x: (x - x.mean()) / x.std())
+            scaling = make_column_transformer((MinMaxScaler(), make_column_selector(dtype_include=['float64'])))
+            pipeline = make_pipeline(normalizer, scaling)
+            pipeline
+            with open('pipe.pkl', 'rb') as file:
+                trained_model = dill.load(file)
+            y_pred = trained_model.predict(df)
             prob_pierre = round((target[1][0][0])*100)
             prob_feuille = round((target[1][0][1])*100)
             prob_ciseaux = round((target[1][0][2])*100)
