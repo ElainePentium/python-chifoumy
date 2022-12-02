@@ -8,22 +8,17 @@ import pandas as pd
 # #from chifoumy.ml_logic.encoders import (transform_time_features,
 #                                               transform_lonlat_features,
 #                                               compute_geohash)
+def normalise(df : pd.DataFrame) -> pd.DataFrame:
 
-def preprocess_features(X: pd.DataFrame) -> np.ndarray:
-
-    def create_sklearn_preprocessor() -> ColumnTransformer:
-
-        normalizer = FunctionTransformer(lambda df: df.apply(lambda row: (row - row.mean()) / row.std(), axis =1))
-        scaling = make_column_transformer((MinMaxScaler(), make_column_selector(dtype_include=['float64'])))
-
-        preprocess = make_pipeline(normalizer, scaling)
-        return preprocess
+        return df.apply(lambda raw: (raw-raw.mean()) / raw.std(), axis=1)
 
 
-    preprocessor = create_sklearn_preprocessor()
 
-    X_processed = preprocessor.fit_transform(X)
+def preprocess_features() -> make_pipeline:
 
-    print("\n✅ X_processed, with shape", X_processed.shape)
+    normalizer = FunctionTransformer(normalise())
+    scaling = make_column_transformer((MinMaxScaler(), make_column_selector(dtype_include=['float64'])))
 
-    return X_processed
+    preprocessor = make_pipeline(normalizer, scaling)
+
+    return preprocessor
