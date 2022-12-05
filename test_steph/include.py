@@ -13,6 +13,8 @@ from PIL import Image
 import pickle
 import time
 
+from chifoumy.ml_logic.registry import load_pipeline
+
 #===============================================================================
 
 
@@ -63,7 +65,7 @@ def picture_to_target(picture):
     """
     df = picture_to_df(picture)
     # Load Pipeline from pickle file
-    my_pipeline = pickle.load(open("pipe.pkl", "rb"))
+    my_pipeline = load_pipeline()
     result = my_pipeline.predict(df)
     return result
 
