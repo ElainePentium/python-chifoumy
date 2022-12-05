@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     software-properties-common \
     git \
     && rm -rf /var/lib/apt/lists/* \
-    ffmpeg libsm6 libxext6  -y
+    libgl1
 
 # RUN git clone https://github.com/streamlit/streamlit-example.git .
 
