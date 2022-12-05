@@ -11,9 +11,12 @@ RUN apt-get update && apt-get install -y \
     software-properties-common \
     git \
     && rm -rf /var/lib/apt/lists/* \
-    libgl1
+    python3-opencv
+
 
 # RUN git clone https://github.com/streamlit/streamlit-example.git .
+
+RUN pip install opencv-python
 
 RUN pip3 install -r requirements.txt
 
