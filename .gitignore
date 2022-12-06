@@ -7,4 +7,5 @@ csv/
 *.csv
 **/__pycache__/
 .env
+.envrc
 .python-version
