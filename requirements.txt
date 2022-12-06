@@ -10,10 +10,6 @@ numpy
 pandas
 scikit-learn
 
-# model loading
-pickle
-dill
-
 # packaging
 pip>=9
 setuptools>=26
@@ -40,5 +36,7 @@ memoized-property
 termcolor
 
 # special chifoumy
-mediapipe
+opencv-python
+mediapipe; sys_platform == 'linux'
+mediapipe-silicon; sys_platform == 'darwin'
 streamlit

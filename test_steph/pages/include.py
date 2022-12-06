@@ -10,17 +10,12 @@ import random
 import os
 import cv2
 from PIL import Image
-import pickle
-import time
 
 #===============================================================================
 
 
-def take_a_picture(key=1):
-    """
-    Do not forget to change the key for multiple camera
-    """
-    picture = st.camera_input(label=" ", disabled=False, key=key)
+def take_a_picture():
+    picture = st.camera_input(label="", disabled=False)
     return picture
 
 
@@ -53,10 +48,21 @@ def picture_to_df(picture):
                 fingers[f'{i}y'] = (finger.y)
                 fingers[f'{i}z'] = (finger.z)
             hand_list.append(fingers)
-        return  pd.DataFrame(hand_list)
+        paper_df = pd.DataFrame(hand_list)
+        return paper_df
 
 
+def picture_to_target(picture):
+    """
+    Docstring
+    """
+    df = picture_to_df(picture)
+    # Load Pipeline from pickle file
+    my_pipeline = pickle.load(open("pipe.pkl", "rb"))
+    result = my_pipeline.predict(df)
+    return result
 
 def create_key():
+    #t = time.time()
     t = time.perf_counter_ns()
     return t

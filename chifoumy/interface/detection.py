@@ -1,32 +1,30 @@
-#===============================================================================
-
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import streamlit as st
 import mediapipe as mp
 import pandas as pd
 from PIL import Image
 import numpy as np
-import random
-import os
+#import random
+#import os
 import cv2
-from PIL import Image
-import pickle
-import time
+#from PIL import Image
+from chifoumy.interface.utils import create_key
+from chifoumy.ml_logic.registry import load_pipeline
+from chifoumy.ml_logic.preprocessor import preprocess_features
 
-#===============================================================================
 
-
-def take_a_picture(key=1):
+def take_a_picture(key):
     """
-    Do not forget to change the key for multiple camera
+    Take a picture with streamlit.camera_input.
     """
-    picture = st.camera_input(label=" ", disabled=False, key=key)
+    picture = st.camera_input(label="", disabled=False, key=key)
     return picture
-
 
 def picture_to_df(picture):
     """
-    Docstring
+    This function take a picture of an hand as argument (created with
+    streamlit.camera_input) and return a DataFrame which contains
+    the mediapipe data of this hand.
     """
     hand_list = []
     mp_hands = mp.solutions.hands
@@ -53,10 +51,5 @@ def picture_to_df(picture):
                 fingers[f'{i}y'] = (finger.y)
                 fingers[f'{i}z'] = (finger.z)
             hand_list.append(fingers)
-        return  pd.DataFrame(hand_list)
-
-
-
-def create_key():
-    t = time.perf_counter_ns()
-    return t
+        paper_df = pd.DataFrame(hand_list)
+        return paper_df

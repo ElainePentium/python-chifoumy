@@ -1,14 +1,12 @@
 import os
 import pandas as pd
-from colorama import Fore, Style
-from chifoumy.ml_logic.params import LOCAL_DATA_PATH
-
-import os
+import glob
 import cv2
 import mediapipe as mp
-import pandas as pd
+from colorama import Fore, Style
+from chifoumy.ml_logic.params import LOCAL_DATA_PATH, LOCAL_CSV_PATH
 
-def from_png_to_csv(hand: str, verbose=True):
+def from_png_to_csv(hand: str, verbose=True) -> None:
     """
     return a dataframe with the coordinate of one gesture, from png files,
     stored in a directory with the name of the gesture, from local disk.
@@ -111,30 +109,17 @@ def from_png_to_csv(hand: str, verbose=True):
 
 
     hand_df = pd.DataFrame(hands_list)
-    hand_df['target'] = 0
 
-    # if save:
-    #     hand_df.to_csv(os.path.join(LOCAL_DATA_PATH,{hand},'_df.csv'), index=False)
+    if hand == 'rock':
+        hand_df['target'] = 0
+    if hand == 'paper':
+        hand_df['target'] = 1
+    if hand == 'scissors':
+        hand_df['target'] = 2
 
-    return hand_df
-
-
-def save_data(data: pd.DataFrame, hand: str, is_first: bool):
-    """
-    save the dataset to local disk
-    """
-
-    path = os.path.join(os.path.expanduser(LOCAL_DATA_PATH))
-
-    print(Fore.BLUE + f"\nSave data to {path}:" + Style.RESET_ALL)
-
-    data.to_csv(path,
-                mode="w" if is_first else "a",
-                header=is_first,
-                index=False)
-
-    data.to_csv(os.path.join(LOCAL_DATA_PATH,{hand},'_df.csv'), index=False)
+    hand_df.to_csv(os.path.join(LOCAL_CSV_PATH,{hand},'_df.csv'), index=False)
 
 
-df = from_png_to_csv('rock')
-df.head()
+def concat_total_csv(path: str):
+    df = pd.concat(map(pd.read_csv, glob.glob("../csv/" + "/*.csv")), ignore_index=True)
+    df.to_csv('../csv/total/chifoumi-dataset.csv', index=False)

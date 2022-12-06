@@ -13,8 +13,9 @@ from PIL import Image
 import pickle
 import time
 
-#===============================================================================
+from chifoumy.ml_logic.registry import load_pipeline
 
+#===============================================================================
 
 def take_a_picture(key=1):
     """
@@ -53,10 +54,22 @@ def picture_to_df(picture):
                 fingers[f'{i}y'] = (finger.y)
                 fingers[f'{i}z'] = (finger.z)
             hand_list.append(fingers)
-        return  pd.DataFrame(hand_list)
+        paper_df = pd.DataFrame(hand_list)
+        return paper_df
 
 
+def picture_to_target(picture):
+    """
+    Docstring
+    """
+    df = picture_to_df(picture)
+    # Load Pipeline from pickle file
+    my_pipeline = load_pipeline()
+    result = my_pipeline.predict(df)
+    probas = my_pipeline.predict_proba(df)
+    return result, probas
 
 def create_key():
+    #t = time.time()
     t = time.perf_counter_ns()
     return t
