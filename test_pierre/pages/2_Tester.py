@@ -4,8 +4,9 @@ import streamlit as st
 #from PIL import Image
 import pandas as pd
 from chifoumy.interface.detection import take_a_picture, picture_to_df
-from chifoumy.interface.detection import picture_to_target
+#from chifoumy.interface.detection import picture_to_target
 from chifoumy.interface.utils import create_key
+from chifoumy.interface.detection import load_pipeline
 
 #===============================================================================
 
@@ -19,7 +20,6 @@ st.markdown(html_title, unsafe_allow_html=True)
 picture = None
 picture = take_a_picture(key=666)
 if picture:
-    st.write("toto")
     button1 = st.button("Tester la photo", key=1234)
     if button1:
         df = picture_to_df(picture)
@@ -28,7 +28,8 @@ if picture:
             st.write("Problème dans l'acquisition photo.")
         else:
             #st.write(df)
-            target = picture_to_target(picture)
+            my_pipeline = load_pipeline()
+            target = my_pipeline.predict(df)
             target = target[0]
             #st.write(type(target))
             #st.write(target.shape)
