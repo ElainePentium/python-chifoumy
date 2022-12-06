@@ -67,7 +67,8 @@ def picture_to_target(picture):
     # Load Pipeline from pickle file
     my_pipeline = load_pipeline()
     result = my_pipeline.predict(df)
-    return result
+    probas = my_pipeline.predict_proba(df)
+    return result, probas
 
 def create_key():
     #t = time.time()

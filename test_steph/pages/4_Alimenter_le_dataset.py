@@ -32,7 +32,7 @@ if picture:
             st.write("Voici le DataFrame :")
             st.write(type(df))
             st.write(df)
-            file_name = "data_images/image_" + str(create_key()) + ".png"
+            file_name = "../data_images/image_" + str(create_key()) + ".png"
             # file_name = "image_" + str(create_key()) + ".png"
             st.write(f"Sauvegarde de la photo '{file_name}'...")
 #            # picture.save(file_name) ?
