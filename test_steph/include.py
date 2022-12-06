@@ -17,7 +17,6 @@ from chifoumy.ml_logic.registry import load_pipeline
 
 #===============================================================================
 
-
 def take_a_picture(key=1):
     """
     Do not forget to change the key for multiple camera

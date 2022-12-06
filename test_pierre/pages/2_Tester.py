@@ -1,11 +1,11 @@
 #===============================================================================
 
-
-
 import streamlit as st
 #from PIL import Image
-from include import take_a_picture, picture_to_df, picture_to_target
 import pandas as pd
+from chifoumy.interface.detection import take_a_picture, picture_to_df
+from chifoumy.interface.detection import picture_to_target
+from chifoumy.interface.utils import create_key
 
 #===============================================================================
 
@@ -17,9 +17,10 @@ html_title = "<h1 style='color:#FF036A'>Testons l'acquisition photo !</h1>"
 st.markdown(html_title, unsafe_allow_html=True)
 
 picture = None
-picture = take_a_picture(key=6453)
+picture = take_a_picture(key=666)
 if picture:
-    button1 = st.button("Tester la photo", key=1)
+    st.write("toto")
+    button1 = st.button("Tester la photo", key=1234)
     if button1:
         df = picture_to_df(picture)
         # st.write(type(df))

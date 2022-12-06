@@ -2,11 +2,14 @@
 
 import streamlit as st
 from PIL import Image
-from include import take_a_picture, picture_to_df, picture_to_target
-from include import create_key
 import pandas as pd
 import matplotlib.image as mpimg
 import numpy as np
+#-------------------------------------------------------------------------------
+
+from chifoumy.interface.detection import take_a_picture, picture_to_df
+from chifoumy.interface.detection import picture_to_target
+from chifoumy.interface.utils import create_key
 
 #===============================================================================
 
@@ -22,6 +25,7 @@ st.markdown(html_title, unsafe_allow_html=True)
 
 picture = None
 picture = take_a_picture(key=6453)
+#picture = take_a_picture()
 if picture:
     button1 = st.button("Sauvegarder la photo", key=1)
     if button1:
@@ -29,9 +33,20 @@ if picture:
         if type(df) == type("toto"):
             st.write("Problème dans l'acquisition photo.")
         else:
+            st.write("✅ Acquisition photo OK")
             st.write("Voici le DataFrame :")
             st.write(type(df))
             st.write(df)
+            #----
+            target = picture_to_target(picture)
+            st.write(f"target={target}")
+            html_pierre ="<div style='color:#E37B01;font-size:30px'>Votre geste : pierre</div>"
+            html_feuille ="<div style='color:#AEC90E;font-size:30px'>Votre geste : feuille</div>"
+            html_ciseaux ="<div style='color:#8B4C89;font-size:30px'>Votre geste : ciseaux</div>"
+            chifoudict = {0: html_pierre, 1: html_feuille, 2: html_ciseaux}
+            html_gesture = chifoudict[target]
+            st.markdown(html_gesture, unsafe_allow_html=True)
+            #----
             file_name = "data_images/image_" + str(create_key()) + ".png"
             # file_name = "image_" + str(create_key()) + ".png"
             st.write(f"Sauvegarde de la photo '{file_name}'...")

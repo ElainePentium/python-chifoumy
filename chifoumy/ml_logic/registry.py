@@ -5,6 +5,7 @@ import glob
 from colorama import Fore, Style
 from chifoumy.ml_logic.params import LOCAL_REGISTRY_PATH
 
+
 def save_pipeline(pipeline = None, metrics = None):
     """
     save pipeline
@@ -50,6 +51,7 @@ def load_pipeline() -> object:
     print("\n✅ model loaded from disk")
 
     return pipeline
+
 
 def save_model(model = None, metrics = None):
     """
