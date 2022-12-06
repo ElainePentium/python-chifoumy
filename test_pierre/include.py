@@ -53,18 +53,9 @@ def picture_to_df(picture):
                 fingers[f'{i}y'] = (finger.y)
                 fingers[f'{i}z'] = (finger.z)
             hand_list.append(fingers)
-        paper_df = pd.DataFrame(hand_list)
-        return paper_df
+        return  pd.DataFrame(hand_list)
 
-def picture_to_target(picture):
-    """
-    Docstring
-    """
-    df = picture_to_df(picture)
-    # Load Pipeline from pickle file
-    my_pipeline = pickle.load(open("pipe.pkl", "rb"))
-    result = my_pipeline.predict(df)
-    return result
+
 
 def create_key():
     t = time.perf_counter_ns()
