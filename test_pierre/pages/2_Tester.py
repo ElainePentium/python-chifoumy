@@ -5,8 +5,8 @@ import streamlit as st
 import pandas as pd
 from chifoumy.interface.detection import take_a_picture, picture_to_df
 #from chifoumy.interface.detection import picture_to_target
-from chifoumy.interface.utils import create_key
-from chifoumy.interface.detection import load_pipeline
+#from chifoumy.interface.utils import create_key
+from chifoumy.ml_logic.registry import load_pipeline
 
 #===============================================================================
 
