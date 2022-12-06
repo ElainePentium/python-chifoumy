@@ -8,3 +8,4 @@ csv/
 **/__pycache__/
 .env
 .python-version
+test_pierre/data_images
