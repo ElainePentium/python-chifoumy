@@ -15,7 +15,7 @@ from chifoumy.ml_logic.registry import load_pipeline
 
 #===============================================================================
 
-IMAGE_PATH = "../images/pierre/"
+IMAGE_PATH = "data_images/pierre/"
 
 #===============================================================================
 
@@ -58,7 +58,7 @@ if picture:
             st.write(f"✅ {texte_gesture}")
             #st.markdown(html_gesture, unsafe_allow_html=True)
             #----
-            file_name = "data_images/image_" + str(create_key()) + ".png"
+            file_name = IMAGE_PATH + "image_" + str(create_key()) + ".png"
             # file_name = "image_" + str(create_key()) + ".png"
 #            # picture.save(file_name) ?
 #            st.write(f"Écriture ddans le ficjier '{file_name}'")
