@@ -29,7 +29,6 @@ def save_pipeline(pipeline = None, metrics = None):
     return None
 
 
-
 def load_pipeline() -> object:
     """
     load the latest saved model, return None if no model found
