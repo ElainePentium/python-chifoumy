@@ -1,4 +1,4 @@
-#===============================================================================ok
+#===============================================================================
 
 import streamlit as st
 from PIL import Image
@@ -39,20 +39,6 @@ if picture:
             st.write("Voici le DataFrame :")
             #st.write(type(df))
             st.write(df)
-            #----
-            my_pipeline = load_pipeline()
-            target = my_pipeline.predict(df)
-            target = target[0]
-            #st.write(f"target={target}")
-            html_pierre ="<div style='color:#E37B01;font-size:30px'>Votre geste : pierre</div>"
-            html_feuille ="<div style='color:#AEC90E;font-size:30px'>Votre geste : feuille</div>"
-            html_ciseaux ="<div style='color:#8B4C89;font-size:30px'>Votre geste : ciseaux</div>"
-            chifoudict = {0: html_pierre, 1: html_feuille, 2: html_ciseaux}
-            html_gesture = chifoudict[target]
-            st.markdown(html_gesture, unsafe_allow_html=True)
-            #----
-            print("🚀 OK")
-            file_name = "data_images/image_" + str(create_key()) + ".png"
             # file_name = "image_" + str(create_key()) + ".png"
             st.write(f"Sauvegarde de la photo '{file_name}' : ✅")
 #            # picture.save(file_name) ?
