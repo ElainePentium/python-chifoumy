@@ -40,7 +40,6 @@ st.markdown(html_title, unsafe_allow_html=True)
 
 file = open("scores.txt", "r")
 for line in file:
-    print("toto")
     tab = line.split(",")
     user_score = int(tab[0])
     machine_score = int(tab[1])
@@ -74,7 +73,7 @@ if picture:
             user_dict = {0: html_user_pierre, 1: html_user_feuille, 2: html_user_ciseaux}
             user_gesture = user_dict[target]
             st.markdown(user_gesture, unsafe_allow_html=True)
-            #----
+            #----------------
             machine_play = random.randint(0, 2)
             html_machine_pierre ="<div style='color:#E37B01;font-size:30px'>Geste machine : pierre</div>"
             html_machine_feuille ="<div style='color:#AEC90E;font-size:30px'>Geste machine : feuille</div>"
