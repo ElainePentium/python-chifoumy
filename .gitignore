@@ -9,3 +9,4 @@ csv/
 .env
 .envrc
 .python-version
+test_pierre/data_images

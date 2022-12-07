@@ -5,6 +5,7 @@ from PIL import Image
 import pandas as pd
 import matplotlib.image as mpimg
 import numpy as np
+
 #-------------------------------------------------------------------------------
 
 from chifoumy.interface.detection import take_a_picture, picture_to_df
