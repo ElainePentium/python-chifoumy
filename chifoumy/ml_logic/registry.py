@@ -30,7 +30,7 @@ def save_pipeline(pipeline = None, metrics = None):
     return None
 
 
-def load_pipeline() -> object:
+def load_pipeline(spock=False) -> object:
     """
     load the latest saved model, return None if no model found
     """
@@ -39,15 +39,25 @@ def load_pipeline() -> object:
     # get latest model_pipeline version
     pipe_directory = os.path.join(LOCAL_REGISTRY_PATH)
 
-    results = glob.glob(f"{pipe_directory}/*")
-    if not results:
-        return None
+    if spock:
+        pipe_path = pipe_directory + "/model_spock.pickle"
+        pipeline = pickle.load(open(pipe_path, "rb"))
+        print("\n✅ spock model loaded from disk 🖖")
 
-    pipe_path = sorted(results)[-1]
-    # print(f"- path: {pipe_path}")
+    else:
+        pipe_path = pipe_directory + "/model_no_spock.pickle"
+        pipeline = pickle.load(open(pipe_path, "rb"))
+        print("\n✅ classic model loaded from disk 👊")
 
-    pipeline = pickle.load(open(pipe_path, "rb"))
-    print("\n✅ model loaded from disk")
+    # results = glob.glob(f"{pipe_directory}/*")
+    # if not results:
+    #     return None
+
+    # pipe_path = sorted(results)[-1]
+    # # print(f"- path: {pipe_path}")
+
+    # pipeline = pickle.load(open(pipe_path, "rb"))
+    # print("\n✅ model loaded from disk")
 
     return pipeline
 
