@@ -88,6 +88,79 @@ def scoring_spock(machine_gesture, user_gesture):
     elif user_gesture==4 and machine_gesture==3:
         return "machine"
 
+def description(machine_gesture, user_gesture):
+    """
+    0: pierre,
+    1: feuille,
+    2: ciseaux,
+    3: python,
+    4: spoke
+    """
+
+    if user_gesture == machine_gesture:
+        html_description = "style='text-align:center;color:#fffa03;font-size:30px'> Match nul !"
+        return html_description
+    elif user_gesture == 0 and machine_gesture == 2:
+        html_description = "style='text-align:center;color:#6aff03;font-size:30px'>Gagné ! PIERRE écrase CISEAUX</div>"
+        return html_description
+    elif user_gesture == 0 and machine_gesture == 3:
+        html_description = "style='text-align:center;color:#6aff03;font-size:30px'> Gagné ! PIERRE assomme PYTHON</div>"
+        return html_description
+    elif user_gesture == 0 and machine_gesture == 1:
+        html_description = "style='text-align:center;color:#ff1a03;font-size:30px'> Perdu ! FEUILLE recouvre PIERRE</div>"
+        return html_description
+    elif user_gesture == 0 and machine_gesture == 4:
+        html_description = "style='text-align:center;color:#ff1a03;font-size:30px'> Perdu ! SPOKE vaporise PIERRE</div>"
+        return html_description
+    elif user_gesture == 1 and machine_gesture == 0:
+        html_description = "style='text-align:center;color:#6aff03;font-size:30px'> Gagné ! FEUILLE recouvre PIERRE</div>"
+        return html_description
+    elif user_gesture == 1 and machine_gesture == 4:
+        html_description = "style='text-align:center;color:#6aff03;font-size:30px'> Gagné ! FEUILLE réfute SPOKE</div>"
+        return html_description
+    elif user_gesture == 1 and machine_gesture == 2:
+        html_description = "style='text-align:center;color:#ff1a03;font-size:30px'> Perdu ! CISEAUX découpent FEUILLE</div>"
+        return html_description
+    elif user_gesture == 1 and machine_gesture == 3:
+        html_description = "style='text-align:center;color:#ff1a03;font-size:30px'> Perdu ! PYTHON mange FEUILLE</div>"
+        return html_description
+    elif user_gesture == 2 and machine_gesture == 1:
+        html_description = "style='text-align:center;color:#6aff03;font-size:30px'> Gagné ! CISEAUX découpent FEUILLE</div>"
+        return html_description
+    elif user_gesture == 2 and machine_gesture == 3:
+        html_description = "style='text-align:center;color:#6aff03;font-size:30px'> Gagné ! CISEAUX décapitent PYTHON</div>"
+        return html_description
+    elif user_gesture == 2 and machine_gesture == 4:
+        html_description = "style='text-align:center;color:#ff1a03;font-size:30px'> Perdu ! SPOKE casse CISEAUX</div>"
+        return html_description
+    elif user_gesture == 2 and machine_gesture == 0:
+        html_description = "style='text-align:center;color:#ff1a03;font-size:30px'> Perdu ! PIERRE écrase CISEAUX</div>"
+        return html_description
+    elif user_gesture == 3 and machine_gesture == 1:
+        html_description = "style='text-align:center;color:#6aff03;font-size:30px'> Gagné ! PYTHON mange FEUILLE</div>"
+        return html_description
+    elif user_gesture == 3 and machine_gesture == 4:
+        html_description = "style='text-align:center;color:#6aff03;font-size:30px'> Gagné ! PYTHON empoisonne SPOKE</div>"
+        return html_description
+    elif user_gesture == 3 and machine_gesture == 2:
+        html_description = "style='text-align:center;color:#ff1a03;font-size:30px'> Perdu ! CISEAUX décapitent PYTHON</div>"
+        return html_description
+    elif user_gesture == 3 and machine_gesture == 0:
+        html_description = "style='text-align:center;color:#ff1a03;font-size:30px'> Perdu ! PIERRE assomme PYTHON</div>"
+        return html_description
+    elif user_gesture == 4 and machine_gesture == 0:
+        html_description = "style='text-align:center;color:#6aff03;font-size:30px'> Gagné ! SPOKE vaporise PIERRE</div>"
+        return html_description
+    elif user_gesture == 4 and machine_gesture == 2:
+        html_description = "style='text-align:center;color:#6aff03;font-size:30px'> Gagné ! SPOKE casse CISEAUX</div>"
+        return html_description
+    elif user_gesture == 4 and machine_gesture == 1:
+        html_description = "style='text-align:center;color:#ff1a03;font-size:30px'> Perdu ! FEUILLE réfute SPOKE</div>"
+        return html_description
+    elif user_gesture == 4 and machine_gesture == 3:
+        html_description = "style='text-align:center;color:#ff1a03;font-size:30px'> Perdu ! PYTHON empoisonne SPOKE</div>"
+        return html_description
+
 #===============================================================================
 
 html_title = "<h1 style='color:#FF036A'>Jouons contre la machine !</h1>"
@@ -169,6 +242,7 @@ if picture:
                             4: "logo_spock_human.png"}
         image_user = IMAGE_PIERRE_PATH + human_image_dict[target]
         image_machine = IMAGE_PIERRE_PATH + machine_image_dict[machine_play]
+        html_description = description(machine_play, target)
         #st.write(image_user)
         #st.write(image_machine)
         #st.image(image_machine)
@@ -196,6 +270,9 @@ if picture:
         <tr>
             <td style='text-align:center;font-size:50px;color:#44B7E3'>{user_score}</td>
             <td style='text-align:center;font-size:50px;color:#44B7E3'>{machine_score} </td>
+        </tr>
+        <tr>
+            <td colspan='2' {html_description} </td>
         </tr>
         </table>
         </div>
